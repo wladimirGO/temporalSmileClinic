@@ -34,21 +34,20 @@ class TreatmentController extends Controller
      */
     public function store(Request $request)
     {
-        /*$request->validate([
+        $request->validate([
             'name' => 'required',
-            'dni' => 'required|numeric|unique:patients',
-            'phone_number' => 'required|numeric|digits_between:10,15',
-            'address' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
         ]);
-        $patient = Patient::create($request->all());
-        $message = "Paciente ".$patient->name." ha sido creado"; 
-        return redirect()->route('pacientes.index')->with('status',$message);*/
+        $treatment = Treatment::create($request->all());
+        $message = "Tratamiento".$treatment->name." ha sido creado"; 
+        return redirect()->route('tratamientos.index')->with('status',$message);
     }
 
-    /**
+     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Patient  $patient
+     * @param  \App\Models\Treatment  $treatment
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,12 +59,12 @@ class TreatmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Patient  $patient
+     * @param  \App\Models\Treatment  $treatment
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-       $treatment = Treatment::findOrFail($id);
+        $treatment = Treatment::findOrFail($id);
         return Inertia::render('Treatment/Edit', compact('treatment'));
     }
 
@@ -73,7 +72,7 @@ class TreatmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Patient  $patient
+     * @param  \App\Models\Treatment  $treatment
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -95,15 +94,12 @@ class TreatmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Patient  $patient
+     * @param  \App\Models\Treatment  $treatment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Treatment $treatment)
     {
-       /* $patient = Patient::findOrFail($id);
-        $message = "Paciente ".$patient->name." ha sido Eliminado!"; 
-        $patient->delete();
-        return redirect()->route('pacientes.index')->with('status',$message);*/
+        //
     }
 }
 
